@@ -15,7 +15,7 @@ def create_grid(size):
             grid[i][j] = 0
     return grid
 
-def run_game(screen, grid, cell_size):
+def run_game(screen, grid, cell_size, generator):
     running = True
     while running:
         for event in pygame.event.get():
@@ -23,18 +23,40 @@ def run_game(screen, grid, cell_size):
                 running = False
 
         screen.fill((0, 0, 0))
+
+        try:
+            next(generator)
+        except StopIteration:
+            pass
         draw_grid(screen, grid, cell_size)
         pygame.display.flip()
     pygame.quit()
+
+
+def dfs(grid, visited, y, x):
+    visited[y][x] = True
+    directions = [(-2, 0), (2, 0), (0, -2), (0, 2)]  # up, down, left, right
+    random.shuffle(directions)
+
+    for dy, dx in directions:
+        ny, nx = y + dy, x + dx
+        if 1 <= ny < len(grid)-1 and 1 <= nx < len(grid[0])-1 and not visited[ny][nx]:
+            grid[(y + ny)//2][(x + nx)//2] = 0  # knock down wall
+            yield
+            yield from dfs(grid, visited, ny, nx)
+
 
 def main():
     pygame.init()
     size = 21
     cell_size = 20
     grid = create_grid(size)
+    visited = [[False for _ in range(size)] for _ in range(size)]
+    generator = dfs(grid, visited, 1, 1)
+
     screen = pygame.display.set_mode((size * cell_size, size * cell_size))
     pygame.display.set_caption("Maze Builder")
-    run_game(screen, grid, cell_size)
+    run_game(screen, grid, cell_size, generator)
 
 if __name__ == "__main__":
     main()
