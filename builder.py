@@ -1,38 +1,40 @@
-# builder.py
-# This module contains a function to build a graph and perform DFS on it.
+import pygame
+import random
 
-import matplotlib.pyplot as plt
-import numpy as np
+def draw_grid(screen, grid, cell_size):
+    for y in range(len(grid)):
+        for x in range(len(grid[0])):
+            color = (0, 0, 0) if grid[y][x] == 1 else (255, 255, 255)
+            rect = pygame.Rect(x * cell_size, y * cell_size, cell_size, cell_size)
+            pygame.draw.rect(screen, color, rect)
 
-def mazebuilder():
-    maze = [
-    [1, 0, 1, 0, 0],
-    [1, 0, 1, 0, 1],
-    [1, 0, 0, 0, 1],
-    [1, 1, 1, 0, 1]
-    ]
+def create_grid(size):
+    grid = [[1 for _ in range(size)] for _ in range(size)]
+    for i in range(1, size, 2):
+        for j in range(1, size, 2):
+            grid[i][j] = 0
+    return grid
 
-    maze[0][0] = 2
-    maze[-1][-1] = 3
+def run_game(screen, grid, cell_size):
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
+        screen.fill((0, 0, 0))
+        draw_grid(screen, grid, cell_size)
+        pygame.display.flip()
+    pygame.quit()
 
-    fig, ax = plt.subplots()
-    ax.imshow(maze, cmap="gray_r")
+def main():
+    pygame.init()
+    size = 21
+    cell_size = 20
+    grid = create_grid(size)
+    screen = pygame.display.set_mode((size * cell_size, size * cell_size))
+    pygame.display.set_caption("Maze Builder")
+    run_game(screen, grid, cell_size)
 
-    maze_array = np.array(maze)
-    
-    start_y, start_x = np.where(maze_array == 2)
-    end_y, end_x = np.where(maze_array == 3)
-
-    # Clean up the axis
-    ax.set_title("Maze")
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_aspect('equal')
-
-    ax.plot(start_x, start_y, 'go')
-    ax.plot(end_x, end_y, 'ro')
-
-    plt.show()
-
-mazebuilder()
+if __name__ == "__main__":
+    main()
