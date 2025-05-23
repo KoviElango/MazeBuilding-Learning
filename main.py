@@ -33,4 +33,9 @@ if __name__ == "__main__":
     print("Dijkstra path length:", len(solver.get_path()))
     app.run_game(app.path_generator(solver.get_path()))
 
+    clear_path_marks(builder.get_grid())
+    solver.solve("a_star")
+    print("A* path length:", len(solver.get_path()))
+    app.run_game(app.path_generator(solver.get_path()))
+
     pygame.quit()
