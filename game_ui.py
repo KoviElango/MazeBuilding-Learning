@@ -6,7 +6,7 @@ class GameUI:
     ALGORITHMS = ["left_wall", "dijkstra", "a_star"]
     CONTROL_BUTTONS = [("Play", "play"), ("Reset Maze", "reset"), ("Exit", "exit")]
 
-    def __init__(self, size=21, cell_size=30):
+    def __init__(self, size=99, cell_size=10):
         pygame.init()
         self.size = size
         self.cell_size = cell_size

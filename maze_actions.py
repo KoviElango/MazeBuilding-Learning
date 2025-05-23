@@ -2,7 +2,7 @@ from maze_builder import MazeBuilder
 from maze_solver_algo import MazeSolver
 
 class MazeActions:
-    def __init__(self, size=21):
+    def __init__(self, size=99):
         self.size = size
         self.start = (1, 1)
         self.end = (size - 2, size - 2)
