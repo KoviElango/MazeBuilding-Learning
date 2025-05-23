@@ -17,6 +17,7 @@ class MazeBuilder:
     def dfs_iterative(self, start_y=1, start_x=1):
         stack = [(start_y, start_x)]
         directions = [(-2,0), (2,0), (0,-2), (0,2)]
+
         self.visited[start_y][start_x] = True
         while stack:
             y, x = stack.pop()

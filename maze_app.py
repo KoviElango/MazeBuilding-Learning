@@ -25,7 +25,7 @@ class MazeApp:
                 elif active_y==y and active_x==x:
                     color = (0,255,0)
                 elif self.grid[y][x]==2:
-                    color = (204,204,0)
+                    color = (210,204,0)
                 rect = pygame.Rect(x*self.cell_size, y*self.cell_size, self.cell_size, self.cell_size)
                 pygame.draw.rect(self.screen, color, rect)
 
@@ -45,7 +45,7 @@ class MazeApp:
                 active_y, active_x = None, None
             self.draw_grid(active_x, active_y)
             pygame.display.flip()
-            self.clock.tick(60)
+            self.clock.tick(150)
 
     def path_generator(self, path):
         for i in range(1, len(path)):

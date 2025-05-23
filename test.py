@@ -1,49 +1,23 @@
-grid = [['.' for _ in range(7)] for _ in range(7)]
-directions = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+import hashlib
 
-y, x = 1, 1
-dir = 1
-grid[y][x] = 'S'
+max_zero = 0
+i = 0
+multiply_factor = 20
 
-for _ in range(2):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
+print("Press Enter to add more items. Type 'q' to quit.\n")
 
-dir = (dir + 1) % 4
+while True:
+    user_input = input("Add more? ")
 
-for _ in range(2):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
+    if user_input.lower() == 'q':
+        break
 
-dir = (dir + 1) % 4
+    for _ in range(multiply_factor):
+        h = hashlib.sha1(str(i).encode()).hexdigest()
+        binary = bin(int(h, 16))[2:].zfill(160)
+        leading_zeros = len(binary) - len(binary.lstrip('0'))
+        max_zero = max(max_zero, leading_zeros)
+        i += 1
 
-for _ in range(2):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
-
-dir = (dir - 1) % 4
-
-for _ in range(1):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
-
-dir = (dir + 2) % 4
-
-for _ in range(2):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
-
-dir = (dir - 1) % 4
-
-for _ in range(2):
-    dy, dx = directions[dir]
-    y, x = y + dy, x + dx
-    grid[y][x] = '*'
-
-for row in grid:
-    print(' '.join(row))
+    estimate = 2 ** max_zero
+    print(f"Items added: {i} | Estimated unique count: {estimate}")
