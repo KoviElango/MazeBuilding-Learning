@@ -22,7 +22,7 @@ class GameUI:
         self._reset_requested = False
 
         self.actions = MazeActions(size)
-        self.maze_gen = self.actions.builder.dfs_iterative()
+        self.maze_gen = self.actions.builder.build()
         self.active_cell = None
 
     # Event Handling
