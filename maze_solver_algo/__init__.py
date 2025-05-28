@@ -1,6 +1,7 @@
 from .left_wall import solve_left_wall
 from .dijkstra import solve_dijkstra
 from .a_star import solve_a_star
+from .dfs_backtracking import solve_dfs_backtracking
 
 class MazeSolver:
     def __init__(self, grid, start, end):
@@ -16,6 +17,8 @@ class MazeSolver:
             self.path = solve_dijkstra(self.grid, self.start, self.end)
         elif method == "a_star":
             self.path = solve_a_star(self.grid, self.start, self.end)
+        elif method == "dfs_backtracking":
+            self.path = solve_dfs_backtracking(self.grid, self.start, self.end)
         else:
             raise ValueError(f"Unknown method: {method}")
 
