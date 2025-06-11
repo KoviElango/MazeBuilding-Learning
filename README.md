@@ -9,6 +9,7 @@ A visual tool built with Python and Pygame to generate and solve mazes using mul
   - Left Wall Follower
   - Dijkstra’s Algorithm
   - A* Search (planned)
+  - DFS Backtracking Algorithm
 - Interactive graphical interface with buttons
 - Live visualization of both maze generation and solving
 
