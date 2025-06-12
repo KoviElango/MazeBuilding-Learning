@@ -2,6 +2,7 @@ from .left_wall import solve_left_wall
 from .dijkstra import solve_dijkstra
 from .a_star import solve_a_star
 from .dfs_backtracking import solve_dfs_backtracking
+from .tremaux import solve_tremaux
 
 class MazeSolver:
     def __init__(self, grid, start, end):
@@ -19,6 +20,8 @@ class MazeSolver:
             self.path = solve_a_star(self.grid, self.start, self.end)
         elif method == "dfs_backtracking":
             self.path = solve_dfs_backtracking(self.grid, self.start, self.end)
+        elif method == "tremaux":  # <-- Add this block
+            self.path = solve_tremaux(self.grid, self.start, self.end)
         else:
             raise ValueError(f"Unknown method: {method}")
 

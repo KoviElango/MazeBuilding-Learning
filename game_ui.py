@@ -3,7 +3,7 @@ from maze_actions import MazeActions
 
 class GameUI:
     SIDEBAR_WIDTH = 200
-    ALGORITHMS = ["left_wall", "dijkstra", "a_star", "dfs_backtracking"]
+    ALGORITHMS = ["left_wall", "dijkstra", "a_star", "dfs_backtracking", "tremaux"]
     CONTROL_BUTTONS = [("Play", "play"), ("Reset Maze", "reset"), ("Exit", "exit")]
 
     def __init__(self, size=21, cell_size=20):
